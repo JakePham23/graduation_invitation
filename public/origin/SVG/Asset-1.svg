@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 936.718 5015.534">
+  <defs>
+    <style>
+      .cls-1{fill:#233169}
+    </style>
+  </defs>
+  <title>Asset 1</title>
+  <g id="Layer_1" data-name="Layer 1">
+    <polygon points="936.718,0 936.718,4549.351 776.503,4708.798 468.359,5015.534 160.215,4708.798 0,4549.351 0,350.757 160.215,290.741 776.503,60.016 905.238,11.773 935.438,0.512" class="cls-1"/>
+  </g>
+</svg>

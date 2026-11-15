@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Kỷ Yếu &amp; Thiệp Mời Tốt Nghiệp 2026 — Phạm Tấn Nghĩa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // ============ ANTI-DEVTOOLS (Tham khảo ThiepCuoiTuMA/script.js) ============
+      (function () {
+        var threshold = 160;
+        var devtoolsOpen = false;
+
+        function hideAndReload() {
+          if (document.documentElement) {
+            document.documentElement.style.display = "none";
+          }
+          if (document.body) {
+            document.body.innerHTML = "";
+          }
+          location.reload();
+        }
+
+        function checkDevTools() {
+          // Bỏ qua trên điện thoại vì thanh gõ URL ẩn/hiện làm thay đổi kích thước liên tục
+          if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              navigator.userAgent
+            )
+          ) {
+            return;
+          }
+
+          var widthDiff = window.outerWidth - window.innerWidth;
+          var heightDiff = window.outerHeight - window.innerHeight;
+          var isOpen = widthDiff > threshold || heightDiff > threshold;
+          if (isOpen && !devtoolsOpen) {
+            devtoolsOpen = true;
+            hideAndReload();
+          } else if (!isOpen) {
+            devtoolsOpen = false;
+          }
+        }
+
+        checkDevTools();
+        setInterval(checkDevTools, 500);
+
+        // Bắt phím F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+        window.addEventListener("keydown", function (e) {
+          if (e.key === "F12" || e.keyCode === 123) {
+            e.preventDefault();
+            hideAndReload();
+          }
+          // Ctrl+Shift+I / Cmd+Option+I
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "I" || e.key === "i")) {
+            e.preventDefault();
+            hideAndReload();
+          }
+          // Ctrl+Shift+J / Cmd+Option+J
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "J" || e.key === "j")) {
+            e.preventDefault();
+            hideAndReload();
+          }
+          // Ctrl+Shift+C / Cmd+Option+C
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "C" || e.key === "c")) {
+            e.preventDefault();
+            hideAndReload();
+          }
+          // Ctrl+U (view source)
+          if ((e.ctrlKey || e.metaKey) && (e.key === "U" || e.key === "u")) {
+            e.preventDefault();
+            hideAndReload();
+          }
+        });
+
+        // Vô hiệu hoá chuột phải
+        window.addEventListener("contextmenu", function (e) {
+          e.preventDefault();
+        });
+      })();
+    </script>
+  </head>
+  <body class="bg-paper text-ink antialiased selection:bg-gold/25 selection:text-navy">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

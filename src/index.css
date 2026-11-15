@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --theme-paper: 250 247 242;   /* #FAF7F2 */
+    --theme-navy: 20 33 61;       /* #14213D */
+    --theme-gold: 197 155 39;     /* #C59B27 */
+    --theme-ink: 31 36 33;        /* #1F2421 */
+    --theme-sage: 92 107 94;      /* #5C6B5E */
+    --theme-crimson: 140 45 25;   /* #8C2D19 */
+  }
+
+  :root[data-theme="pastel"] {
+    --theme-paper: 255 247 250;   /* #FFF7FA - Hồng kem phấn */
+    --theme-navy: 122 53 85;      /* #7A3555 - Hồng mận trầm */
+    --theme-gold: 217 119 155;    /* #D9779B - Hồng pastel */
+    --theme-ink: 58 36 48;        /* #3A2430 - Nâu tím dịu */
+    --theme-sage: 142 107 123;    /* #8E6B7B - Hồng xám pastel */
+    --theme-crimson: 196 69 105;  /* #C44569 - Hồng đậm */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: rgb(var(--theme-paper));
+    color: rgb(var(--theme-ink));
+    font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: "Cormorant Garamond", Georgia, serif;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--theme-gold));
+    outline-offset: 2px;
+  }
+}
+
+@keyframes eqBar1 {
+  0%, 100% { height: 5px; }
+  50% { height: 15px; }
+}
+@keyframes eqBar2 {
+  0%, 100% { height: 14px; }
+  40% { height: 6px; }
+  80% { height: 17px; }
+}
+@keyframes eqBar3 {
+  0%, 100% { height: 8px; }
+  35% { height: 16px; }
+  70% { height: 5px; }
+}
+@keyframes eqBar4 {
+  0%, 100% { height: 16px; }
+  55% { height: 6px; }
+}
+
+.eq-bar-1 { animation: eqBar1 0.85s ease-in-out infinite; }
+.eq-bar-2 { animation: eqBar2 0.75s ease-in-out infinite; }
+.eq-bar-3 { animation: eqBar3 0.95s ease-in-out infinite; }
+.eq-bar-4 { animation: eqBar4 0.7s ease-in-out infinite; }
+
+.font-playfair {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.font-lora {
+  font-family: "Lora", Georgia, serif;
+}
+
+.cap-vn {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.28em;
+  font-style: italic;
+  color: rgb(var(--theme-gold));
+  line-height: 1;
+}
+
+/* Hiệu ứng đánh bóng ánh kim (Shimmer Sheen) quét qua tấm thiệp */
+@keyframes cardSheenSweep {
+  0% {
+    transform: translateX(-140%) skewX(-22deg);
+  }
+  45%, 100% {
+    transform: translateX(220%) skewX(-22deg);
+  }
+}
+
+.card-polish-sheen {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 35%,
+    rgba(255, 255, 255, 0.78) 50%,
+    rgb(var(--theme-gold) / 0.45) 58%,
+    transparent 100%
+  );
+  animation: cardSheenSweep 3.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Hiệu ứng lấp lánh ngôi sao quanh thiệp */
+@keyframes twinkleStar {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.65) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(25deg);
+  }
+}
+
+.sparkle-star {
+  animation: twinkleStar 2.2s ease-in-out infinite;
+}
+
+/* Hiệu ứng tấm thiệp đoạn đầu chậm rãi xuất hiện */
+@keyframes slowCardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(16vh) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(10vh) scale(1);
+  }
+}
+
+.cover-card-slow-appear {
+  animation: slowCardAppear 2.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hiệu ứng các thẻ lời mời bên dưới từ từ hiện ra lần lượt và lướt nhẹ lên sau khi tấm thiệp đã về đúng vị trí */
+@keyframes staggerSectionRise {
+  0% {
+    opacity: 0;
+    transform: translateY(42px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.letter-sections-stagger article > section {
+  opacity: 0;
+  animation: staggerSectionRise 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.letter-sections-stagger article > section:nth-of-type(1) {
+  animation-delay: 0.15s;
+}
+.letter-sections-stagger article > section:nth-of-type(2) {
+  animation-delay: 0.55s;
+}
+.letter-sections-stagger article > section:nth-of-type(3) {
+  animation-delay: 0.95s;
+}
+.letter-sections-stagger article > section:nth-of-type(4) {
+  animation-delay: 1.35s;
+}
+.letter-sections-stagger article > section:nth-of-type(5) {
+  animation-delay: 1.75s;
+}
+.letter-sections-stagger article > section:nth-of-type(6) {
+  animation-delay: 2.15s;
+}
+.letter-sections-stagger article > section:nth-of-type(7) {
+  animation-delay: 2.55s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

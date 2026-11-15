@@ -1,0 +1,55 @@
+[
+  {
+    "id": "inv-gia-dinh",
+    "route_hash": "giadinh",
+    "recipient_label": "Ba Mẹ & Gia đình",
+    "relationship_tag": "Gia đình",
+    "password_hint": "Mật khẩu mẫu: giadinh2026 (hãy đổi thành mật khẩu riêng của bạn)",
+    "password": "giadinh2026",
+    "private_pepper": "",
+    "salutation": "Gửi Ba Mẹ kính yêu của con,",
+    "opening_story": "Cảm ơn Ba Mẹ đã luôn là điểm tựa vững chắc nhất trong suốt bốn năm đại học của con.",
+    "heartfelt_message": "Mỗi bước đường con đi đều có sự hy sinh thầm lặng và niềm tin của gia đình.",
+    "invitation_body": "Con trân trọng kính mời Ba Mẹ đến dự lễ trao bằng tốt nghiệp để chung vui cùng con trong ngày đặc biệt này.",
+    "event_date": "Thứ Bảy, ngày 28 tháng 11 năm 2026",
+    "ceremony_time": "07:30 – 09:15 (Lễ trao bằng chính thức trong hội trường)",
+    "photo_time_slot": "09:30 – 10:15 (Khung giờ chụp ảnh cùng gia đình tại sảnh chính)",
+    "venue_detail": "Hội trường A, Cơ sở chính — Ghế khách mời khu vực hàng đầu",
+    "parking_and_map": "Gửi xe tại cổng chính, có tình nguyện viên hướng dẫn vào khu vực gia đình",
+    "dress_code": "Trang phục trang trọng tông màu kem, trắng hoặc xanh pastel",
+    "emergency_contact": "Khi con đang làm lễ trên sân khấu, Ba Mẹ gọi Quốc Bảo (090x.xxx.xxx) để được đón nhé",
+    "closing_signature": "Con của Ba Mẹ, Phạm Tân Nghĩa",
+    "rsvp_status_options": [
+      "Gia đình sẽ đến đúng giờ 07:30",
+      "Đến vào khung giờ chụp ảnh 09:30"
+    ],
+    "post_ceremony_party": "18:00 cùng ngày: Bữa cơm thân mật của gia đình tại nhà hàng..."
+  },
+  {
+    "id": "inv-ban-dai-hoc",
+    "route_hash": "bandaihoc",
+    "recipient_label": "Hội Bạn Đại Học",
+    "relationship_tag": "Tri kỷ",
+    "password_hint": "Mật khẩu mẫu: bandaihoc2026",
+    "password": "bandaihoc2026",
+    "private_pepper": "",
+    "salutation": "Chào những người anh em cùng chạy đồ án,",
+    "opening_story": "Nhớ những đêm thức trắng sửa lỗi trước ngày bảo vệ, vậy mà giờ đã sắp cầm tấm bằng trên tay.",
+    "heartfelt_message": "Cảm ơn tụi mình vì đã không bỏ cuộc và luôn chia sẻ với nhau từng khoảnh khắc thanh xuân.",
+    "invitation_body": "Sáng thứ Bảy này nhất định phải có mặt để làm một bộ ảnh kỷ yếu thật rực rỡ nhé!",
+    "event_date": "Thứ Bảy, ngày 28 tháng 11 năm 2026",
+    "ceremony_time": "07:30 – 09:15 (Lễ trong hội trường)",
+    "photo_time_slot": "09:30 – 10:30 (Chụp hình tập thể ngoài sân chính cạnh đài phun nước)",
+    "venue_detail": "Sân khu A, Cơ sở chính — Tập trung tại hàng cây cạnh đài phun nước",
+    "parking_and_map": "Gửi xe máy cổng số 2, đi bộ 100m vào sân khu A",
+    "dress_code": "Trang phục sáng màu (trắng, be, xanh nhạt) để lên hình nổi bật",
+    "emergency_contact": "Gọi cho Quốc Bảo (090x.xxx.xxx) nếu mình chưa kịp ra khỏi hội trường",
+    "closing_signature": "Thân mến, Phạm Tân Nghĩa",
+    "rsvp_status_options": [
+      "Có mặt đúng khung giờ chụp 09:30",
+      "Đến trễ hơn một chút sau 10:30",
+      "Bận không đến được nhưng gửi lời chúc từ xa"
+    ],
+    "post_ceremony_party": "19:00 cùng ngày: Tiệc liên hoan nhóm bạn thân..."
+  }
+]

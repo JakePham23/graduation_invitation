@@ -1,0 +1,28 @@
+# Dependencies & build
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Environment & secrets (NEVER commit)
+.env
+.env.local
+.env.*.local
+
+# Private unencrypted invitation data (NEVER commit)
+*.private.json
+local-invitations.private.json
+
+# Raw heavy images (chỉ commit ảnh đã nén JPEG)
+public/personal_image/
+*.heic
+*.HEIC
+
+# Python & OS & editor
+__pycache__/
+.venv/
+.DS_Store
+*.log
+docs/
+public/personal*
+src/data/encrypted-invitations.json
