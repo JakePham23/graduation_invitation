@@ -9,7 +9,7 @@ function stripUnsafeText(input: string, maxLen: number): string {
 }
 
 export function isSheetsConfigured(): boolean {
-  return Boolean(APPS_SCRIPT_URL);
+  return Boolean(APPS_SCRIPT_URL) && !APPS_SCRIPT_URL.includes("YOUR_DEPLOYMENT_ID");
 }
 
 export async function fetchWishes(): Promise<WishEntry[]> {

@@ -222,7 +222,10 @@ export function App() {
     // Tự động đồng bộ danh sách thiệp 18 cột từ Google Sheets (nếu có)
     fetchInvitationsFromSheet()
       .then(async (sheetPlainList) => {
-        if (!sheetPlainList || sheetPlainList.length === 0) return;
+        if (!sheetPlainList || sheetPlainList.length === 0) {
+          setInvitationsList((prev) => (prev.length > 0 ? prev : INITIAL_INVITATIONS));
+          return;
+        }
         const encryptedFromSheet: EncryptedInvitationRecord[] = [];
         const secretsFromSheet: Record<string, CoverLetterSecret> = {};
         for (const item of sheetPlainList) {
@@ -268,7 +271,8 @@ export function App() {
         }
       })
       .catch(() => {
-        // Bỏ qua nếu Apps Script chưa bật action=invitations
+        // Fallback về dữ liệu mẫu nếu không tải được từ Google Sheets
+        setInvitationsList((prev) => (prev.length > 0 ? prev : INITIAL_INVITATIONS));
       })
       .finally(() => {
         setSheetsInvitationsLoading(false);
