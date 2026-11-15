@@ -1,0 +1,14 @@
+[
+  {
+    "id": "inv-gia-dinh",
+    "route_hash": "giadinh",
+    "recipient_label": "Ba Mẹ & Gia đình (example)",
+    "relationship_tag": "Gia đình",
+    "password_hint": "Mật khẩu mẫu: giadinh2026 (hãy đổi thành mật khẩu riêng của bạn)",
+    "salt": "7ZnsZo5m+/Xa9D6tio7S2w==",
+    "iv": "z23dRNRpRY/bNkHg",
+    "ciphertext": "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",
+    "uses_server_pepper": false,
+    "default_qr_key": "giadinh2026"
+  }
+]

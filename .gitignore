@@ -25,4 +25,3 @@ __pycache__/
 *.log
 docs/
 public/personal*
-src/data/encrypted-invitations.json

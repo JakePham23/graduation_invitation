@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, CalendarPlus, CheckCircle2, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CEREMONY_INFO } from "@/config/ceremony";
+import { useThemePalette } from "@/config/theme";
 import { GraduationCardHero } from "@/components/GraduationCardHero";
 import { GuestbookSection } from "@/components/GuestbookSection";
 import { submitRsvp, isSheetsConfigured } from "@/services/sheetsApi";
@@ -97,6 +98,7 @@ export function CoverLetterView({
   wishesError,
   onWishAdded,
 }: CoverLetterViewProps) {
+  const palette = useThemePalette();
   const [selectedRsvp, setSelectedRsvp] = useState(secret.rsvp_status_options[0] || "");
   const [rsvpNote, setRsvpNote] = useState("");
   const [rsvpSaving, setRsvpSaving] = useState(false);
@@ -187,23 +189,22 @@ export function CoverLetterView({
       {/* 1. KHỐI TRÍCH DẪN & TÂM THƯ (Thẻ nổi bo góc để lộ nền Vũ Trụ 3D xung quanh trên Mobile) */}
       <section
         aria-label="Tâm thư kỷ niệm"
-        className="relative overflow-hidden rounded-[20px] border border-[#fbb719]/35 px-5 py-8 text-center shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:px-6"
+        className="relative overflow-hidden rounded-[20px] border border-gold/35 px-5 py-8 text-center shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:px-6"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(248,250,252,0.94) 0%, rgba(231,237,245,0.94) 45%, rgba(255,255,255,0.96) 100%)",
+          background: palette.cardBg,
         }}
       >
         <div className="mx-auto max-w-[420px]">
-          <div className="font-playfair text-3xl leading-none text-[#c8960c]">❝</div>
-          <h2 className="mt-2 font-playfair text-xl font-bold italic text-[#233169] sm:text-2xl">
+          <div className="font-playfair text-3xl leading-none text-gold">❝</div>
+          <h2 className="mt-2 font-playfair text-xl font-bold italic text-navy sm:text-2xl">
             {secret.salutation}
           </h2>
           <p className="mt-3 font-display text-[17.5px] italic leading-[1.75] text-slate-700 sm:text-[18.5px]">
             {secret.opening_story} {secret.heartfelt_message}
           </p>
-          <div className="mt-2 font-playfair text-3xl leading-none text-[#c8960c]">❞</div>
+          <div className="mt-2 font-playfair text-3xl leading-none text-gold">❞</div>
           {secret.closing_signature && (
-            <p className="mt-3 font-calligraphy text-2xl text-[#233169] sm:text-3xl">
+            <p className="mt-3 font-calligraphy text-2xl text-navy sm:text-3xl">
               {secret.closing_signature}
             </p>
           )}
@@ -213,19 +214,18 @@ export function CoverLetterView({
       {/* 2. THÔNG TIN LỄ TỐT NGHIỆP & THÂN MỜI */}
       <section
         aria-label="Thông tin lễ tốt nghiệp"
-        className="relative overflow-hidden rounded-[20px] border border-[#fbb719]/35 px-5 py-9 text-center shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:px-7"
+        className="relative overflow-hidden rounded-[20px] border border-gold/35 px-5 py-9 text-center shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:px-7"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(231,237,245,0.94) 55%, rgba(244,247,251,0.95) 100%)",
+          background: palette.cardBg,
         }}
       >
-        <div className="font-playfair text-lg font-bold uppercase tracking-[3px] text-[#233169] sm:text-xl">
+        <div className="font-playfair text-lg font-bold uppercase tracking-[3px] text-navy sm:text-xl">
           THÔNG TIN LỄ TỐT NGHIỆP
         </div>
 
         <p className="mt-5 font-display text-lg text-slate-600">Trân trọng kính mời</p>
 
-        <div className="mt-2 inline-block rounded-full border border-[#c8960c]/45 bg-[#233169] px-7 py-2 font-script text-2xl font-bold text-[#fbb719] shadow-md sm:text-3xl">
+        <div className="mt-2 inline-block rounded-full border border-gold/45 bg-navy px-7 py-2 font-script text-2xl font-bold text-gold shadow-md sm:text-3xl">
           {record.recipient_label}
         </div>
 
@@ -235,17 +235,17 @@ export function CoverLetterView({
 
         {/* Đường phân cách hoa thị ✦ */}
         <div className="my-6 flex items-center justify-center gap-3">
-          <div className="h-px w-16 bg-[#c8960c]/50" />
-          <span className="text-sm text-[#c8960c]">✦</span>
-          <div className="h-px w-16 bg-[#c8960c]/50" />
+          <div className="h-px w-16 bg-gold/50" />
+          <span className="text-sm text-gold">✦</span>
+          <div className="h-px w-16 bg-gold/50" />
         </div>
 
         {/* Tên Tân Cử Nhân chữ nghệ thuật lớn */}
         <div className="py-2">
-          <div className="text-[11px] font-semibold uppercase tracking-[3px] text-[#c8960c]">
+          <div className="text-[11px] font-semibold uppercase tracking-[3px] text-gold">
             TÂN CỬ NHÂN CÔNG NGHỆ THÔNG TIN • {CEREMONY_INFO.cohort}
           </div>
-          <div className="mt-3 font-calligraphy text-5xl leading-tight text-[#233169] sm:text-6xl">
+          <div className="mt-3 font-calligraphy text-5xl leading-tight text-navy sm:text-6xl">
             {CEREMONY_INFO.graduateName}
           </div>
           <div className="mt-1.5 font-lora text-xs italic text-slate-500">
@@ -257,18 +257,17 @@ export function CoverLetterView({
       {/* 3. THỜI GIAN HYPERLINK ADD CALENDAR & ĐỊA ĐIỂM GOOGLE MAPS */}
       <section
         aria-label="Thời gian và Địa điểm"
-        className="overflow-hidden rounded-[20px] border border-[#fbb719]/35 px-4 py-7 shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:px-6"
+        className="overflow-hidden rounded-[20px] border border-gold/35 px-4 py-7 shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:px-6"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(244,247,251,0.95) 0%, rgba(231,237,245,0.94) 50%, rgba(248,250,252,0.95) 100%)",
+          background: palette.cardBg,
         }}
       >
         <div className="mx-auto max-w-[500px]">
           <div className="text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#c8960c]">
+            <p className="text-[11px] font-semibold uppercase tracking-[3px] text-gold">
               ✦ LỊCH TRÌNH ĐÓN TIẾP ✦
             </p>
-            <h3 className="mt-1 font-playfair text-2xl font-bold text-[#233169] sm:text-3xl">
+            <h3 className="mt-1 font-playfair text-2xl font-bold text-navy sm:text-3xl">
               Lễ Trao Bằng &amp; Chụp Hình
             </h3>
             {secret.event_date && (
@@ -285,7 +284,7 @@ export function CoverLetterView({
               target={isIOS ? undefined : "_blank"}
               rel={isIOS ? undefined : "noreferrer"}
               onClick={handleCalendarClick}
-              className="group inline-flex items-center justify-center gap-5 rounded-2xl border border-[#c8960c]/30 bg-white/90 px-6 py-4 text-[#233169] shadow-[0_6px_24px_rgba(35,49,105,0.06)] transition hover:border-[#c8960c] hover:shadow-md"
+              className="group inline-flex items-center justify-center gap-5 rounded-2xl border border-gold/30 bg-white/90 px-6 py-4 text-navy shadow-[0_6px_24px_rgba(35,49,105,0.06)] transition hover:border-gold hover:shadow-md"
               title={
                 isIOS
                   ? "Bấm để thêm vào Lịch iPhone/iOS (Apple Calendar)"
@@ -301,17 +300,17 @@ export function CoverLetterView({
                 </div>
               </div>
 
-              <div className="h-10 w-px bg-[#233169]/25" />
+              <div className="h-10 w-px bg-navy/25" />
 
-              <div className="font-playfair text-5xl font-bold leading-none text-[#233169] transition group-hover:text-[#c8960c]">
+              <div className="font-playfair text-5xl font-bold leading-none text-navy transition group-hover:text-gold">
                 28
               </div>
 
-              <div className="h-10 w-px bg-[#233169]/25" />
+              <div className="h-10 w-px bg-navy/25" />
 
               <div className="text-left leading-tight">
-                <div className="font-calligraphy text-2xl text-[#c8960c]">Tháng 11</div>
-                <div className="font-playfair text-sm font-bold tracking-[2px] text-[#233169] sm:text-base">
+                <div className="font-calligraphy text-2xl text-gold">Tháng 11</div>
+                <div className="font-playfair text-sm font-bold tracking-[2px] text-navy sm:text-base">
                   2026
                 </div>
               </div>
@@ -323,22 +322,22 @@ export function CoverLetterView({
                 target={isIOS ? undefined : "_blank"}
                 rel={isIOS ? undefined : "noreferrer"}
                 onClick={handleCalendarClick}
-                className="inline-flex items-center gap-2 rounded-full border border-[#c8960c]/50 bg-[#233169] px-5 py-2 text-xs font-semibold tracking-wider text-white shadow-sm transition hover:bg-[#1a2552]"
+                className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-navy px-5 py-2 text-xs font-semibold tracking-wider text-white shadow-sm transition hover:bg-navy/90"
               >
-                <CalendarPlus className="h-3.5 w-3.5 text-[#fbb719]" />
+                <CalendarPlus className="h-3.5 w-3.5 text-gold" />
                 <span>
                   {isIOS
                     ? "Thêm vào Lịch iPhone (Apple Calendar)"
                     : "Thêm vào Google Calendar"}
                 </span>
-                <ExternalLink className="h-3 w-3 text-[#fbb719]" />
+                <ExternalLink className="h-3 w-3 text-gold" />
               </a>
             </div>
           </div>
 
           {/* Thẻ Địa Điểm Tổ Chức (Bo góc 16px, Header xanh Navy, Nút Google Maps) */}
-          <div className="mt-6 overflow-hidden rounded-[16px] border border-[#c8960c]/25 bg-white shadow-[0_8px_30px_rgba(35,49,105,0.07)]">
-            <div className="flex items-center gap-3.5 bg-[#233169] px-5 py-3.5">
+          <div className="mt-6 overflow-hidden rounded-[16px] border border-gold/25 bg-white shadow-[0_8px_30px_rgba(35,49,105,0.07)]">
+            <div className="flex items-center gap-3.5 bg-navy px-5 py-3.5">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/80 bg-white p-0.5">
                 <img
                   src="/logo_hcmus.png"
@@ -347,7 +346,7 @@ export function CoverLetterView({
                 />
               </div>
               <div className="text-left">
-                <div className="text-[10px] font-semibold uppercase tracking-[2px] text-[#fbb719]">
+                <div className="text-[10px] font-semibold uppercase tracking-[2px] text-gold">
                   ĐỊA ĐIỂM TỔ CHỨC
                 </div>
                 <div className="mt-0.5 font-playfair text-base font-bold text-white sm:text-lg">
@@ -360,7 +359,7 @@ export function CoverLetterView({
               <div className="flex items-start gap-3">
                 <span className="text-base leading-none">📍</span>
                 <div>
-                  <div className="font-playfair text-xs font-bold uppercase tracking-wider text-[#233169]">
+                  <div className="font-playfair text-xs font-bold uppercase tracking-wider text-navy">
                     Địa điểm &amp; Điểm hẹn
                   </div>
                   <div className="mt-0.5 text-[13.5px] leading-relaxed text-slate-600">
@@ -372,7 +371,7 @@ export function CoverLetterView({
               <div className="flex items-start gap-3">
                 <span className="text-base leading-none">⏰</span>
                 <div>
-                  <div className="font-playfair text-xs font-bold uppercase tracking-wider text-[#233169]">
+                  <div className="font-playfair text-xs font-bold uppercase tracking-wider text-navy">
                     Khung giờ đón tiếp (Bấm để lưu lịch)
                   </div>
                   <a
@@ -380,7 +379,7 @@ export function CoverLetterView({
                     target={isIOS ? undefined : "_blank"}
                     rel={isIOS ? undefined : "noreferrer"}
                     onClick={handleCalendarClick}
-                    className="mt-0.5 block text-[13.5px] font-semibold text-[#233169] underline decoration-[#c8960c] underline-offset-4"
+                    className="mt-0.5 block text-[13.5px] font-semibold text-navy underline decoration-gold underline-offset-4"
                   >
                     Chụp hình giao lưu: {secret.photo_time_slot}
                   </a>
@@ -393,7 +392,7 @@ export function CoverLetterView({
               <div className="flex items-start gap-3">
                 <span className="text-base leading-none">🛵</span>
                 <div className="w-full">
-                  <div className="font-playfair text-xs font-bold uppercase tracking-wider text-[#233169]">
+                  <div className="font-playfair text-xs font-bold uppercase tracking-wider text-navy">
                     Gửi xe &amp; Di chuyển
                   </div>
                   <div className="mt-1.5 space-y-1.5 text-[13px] leading-relaxed">
@@ -405,9 +404,9 @@ export function CoverLetterView({
                         idx === 0 ? (
                           <div
                             key={idx}
-                            className="rounded-lg border border-[#c8960c]/35 bg-[#fefcf5] px-2.5 py-1.5 font-bold text-[#233169]"
+                            className="rounded-lg border border-gold/35 bg-paper px-2.5 py-1.5 font-bold text-navy"
                           >
-                            <span className="mr-1.5 inline-block rounded bg-[#c8960c] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                            <span className="mr-1.5 inline-block rounded bg-gold px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
                               Khuyến khích
                             </span>
                             <span>{optionText}</span>
@@ -430,11 +429,11 @@ export function CoverLetterView({
 
               <div className="grid gap-2.5 border-t border-slate-100 pt-3 sm:grid-cols-2">
                 <div className="rounded-xl bg-[#f8fafc] p-3 text-xs">
-                  <div className="font-playfair font-bold text-[#233169]">👔 Trang phục gợi ý</div>
+                  <div className="font-playfair font-bold text-navy">👔 Trang phục gợi ý</div>
                   <div className="mt-1 text-slate-600">{secret.dress_code}</div>
                 </div>
                 <div className="rounded-xl bg-[#f8fafc] p-3 text-xs">
-                  <div className="font-playfair font-bold text-[#233169]">📞 Liên hệ hỗ trợ</div>
+                  <div className="font-playfair font-bold text-navy">📞 Liên hệ hỗ trợ</div>
                   <div className="mt-1 text-slate-600">{secret.emergency_contact}</div>
                 </div>
               </div>
@@ -443,7 +442,7 @@ export function CoverLetterView({
                 href={CEREMONY_INFO.mapUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[#233169] px-4 py-3 text-xs font-semibold uppercase tracking-[1.5px] text-white shadow-sm transition hover:bg-[#1a2552]"
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-xs font-semibold uppercase tracking-[1.5px] text-white shadow-sm transition hover:bg-navy/90"
               >
                 <span>🗺 XEM ĐƯỜNG ĐI (GOOGLE MAPS)</span>
               </a>
@@ -455,42 +454,42 @@ export function CoverLetterView({
       {/* 4. ĐẾM NGƯỢC NGÀY TỐT NGHIỆP (Tham khảo #countdown-section của ThiepCuoiTuMA) */}
       <section aria-label="Đếm ngược ngày tốt nghiệp">
         <div
-          className="mx-auto max-w-[500px] rounded-[20px] border border-[#fbb719]/35 px-5 py-7 text-center shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md"
+          className="mx-auto max-w-[500px] rounded-[20px] border border-gold/35 px-5 py-7 text-center shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md"
           style={{
             background:
               "linear-gradient(145deg, rgba(240,248,255,0.95) 0%, rgba(255,255,255,0.96) 65%, rgba(254,252,245,0.95) 100%)",
           }}
         >
-          <h3 className="font-playfair text-xl font-bold tracking-wide text-[#233169] sm:text-2xl">
+          <h3 className="font-playfair text-xl font-bold tracking-wide text-navy sm:text-2xl">
             Đếm Ngược Ngày Tốt Nghiệp
           </h3>
           <div className="mt-5 flex items-center justify-center gap-3 sm:gap-5">
-            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-[#c8960c]/20">
-              <span className="font-playfair text-2xl font-bold text-[#c8960c] sm:text-3xl">
+            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-gold/20">
+              <span className="font-playfair text-2xl font-bold text-gold sm:text-3xl">
                 {countdown.days}
               </span>
-              <span className="mt-0.5 text-[11px] font-medium text-[#233169]">Ngày</span>
+              <span className="mt-0.5 text-[11px] font-medium text-navy">Ngày</span>
             </div>
-            <span className="font-playfair text-xl font-bold text-[#233169]">:</span>
-            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-[#c8960c]/20">
-              <span className="font-playfair text-2xl font-bold text-[#c8960c] sm:text-3xl">
+            <span className="font-playfair text-xl font-bold text-navy">:</span>
+            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-gold/20">
+              <span className="font-playfair text-2xl font-bold text-gold sm:text-3xl">
                 {countdown.hours}
               </span>
-              <span className="mt-0.5 text-[11px] font-medium text-[#233169]">Giờ</span>
+              <span className="mt-0.5 text-[11px] font-medium text-navy">Giờ</span>
             </div>
-            <span className="font-playfair text-xl font-bold text-[#233169]">:</span>
-            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-[#c8960c]/20">
-              <span className="font-playfair text-2xl font-bold text-[#c8960c] sm:text-3xl">
+            <span className="font-playfair text-xl font-bold text-navy">:</span>
+            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-gold/20">
+              <span className="font-playfair text-2xl font-bold text-gold sm:text-3xl">
                 {countdown.mins}
               </span>
-              <span className="mt-0.5 text-[11px] font-medium text-[#233169]">Phút</span>
+              <span className="mt-0.5 text-[11px] font-medium text-navy">Phút</span>
             </div>
-            <span className="font-playfair text-xl font-bold text-[#233169]">:</span>
-            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-[#c8960c]/20">
-              <span className="font-playfair text-2xl font-bold text-[#c8960c] sm:text-3xl">
+            <span className="font-playfair text-xl font-bold text-navy">:</span>
+            <div className="flex min-w-[60px] flex-col items-center rounded-xl bg-white px-3 py-2.5 shadow-sm border border-gold/20">
+              <span className="font-playfair text-2xl font-bold text-gold sm:text-3xl">
                 {countdown.secs}
               </span>
-              <span className="mt-0.5 text-[11px] font-medium text-[#233169]">Giây</span>
+              <span className="mt-0.5 text-[11px] font-medium text-navy">Giây</span>
             </div>
           </div>
         </div>
@@ -500,17 +499,17 @@ export function CoverLetterView({
       {secret.rsvp_status_options.length > 0 && (
         <section aria-label="Xác nhận tham gia">
           <div
-            className="mx-auto max-w-[500px] rounded-[20px] border border-[#fbb719]/35 p-6 shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:p-7"
+            className="mx-auto max-w-[500px] rounded-[20px] border border-gold/35 p-6 shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md sm:p-7"
             style={{
               background:
                 "linear-gradient(155deg, rgba(255,255,255,0.96) 0%, rgba(244,248,255,0.95) 60%, rgba(253,250,242,0.95) 100%)",
             }}
           >
             <div className="text-center">
-              <p className="text-[11px] font-semibold uppercase tracking-[3px] text-[#c8960c]">
+              <p className="text-[11px] font-semibold uppercase tracking-[3px] text-gold">
                 ✦ PHẢN HỒI THAM DỰ ✦
               </p>
-              <h3 className="mt-1 font-playfair text-2xl font-bold text-[#233169]">
+              <h3 className="mt-1 font-playfair text-2xl font-bold text-navy">
                 Xác Nhận Tham Gia
               </h3>
               <p className="mt-1 font-lora text-xs italic text-slate-600">
@@ -519,8 +518,8 @@ export function CoverLetterView({
             </div>
 
             {rsvpDone ? (
-              <div className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-[#c8960c]/40 bg-[#c8960c]/10 p-3.5 text-xs font-medium text-[#233169] sm:text-sm">
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-[#c8960c]" />
+              <div className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-gold/40 bg-gold/10 p-3.5 text-xs font-medium text-navy sm:text-sm">
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-gold" />
                 <span>Đã ghi nhận phản hồi của bạn. Hẹn gặp bạn tại buổi lễ nhé!</span>
               </div>
             ) : (
@@ -533,8 +532,8 @@ export function CoverLetterView({
                       onClick={() => setSelectedRsvp(option)}
                       className={`w-full rounded-xl border px-4 py-3 text-left text-xs font-medium transition-all ${
                         selectedRsvp === option
-                          ? "border-[#233169] bg-[#233169] text-white shadow-sm"
-                          : "border-[#c8960c]/30 bg-white text-slate-700 hover:border-[#233169]"
+                          ? "border-navy bg-navy text-white shadow-sm"
+                          : "border-gold/30 bg-white text-slate-700 hover:border-navy"
                       }`}
                     >
                       {option}
@@ -547,14 +546,14 @@ export function CoverLetterView({
                   value={rsvpNote}
                   onChange={(e) => setRsvpNote(e.target.value)}
                   placeholder="Tên của bạn hoặc lời nhắn hẹn giờ (tùy chọn)..."
-                  className="w-full rounded-xl border border-[#c8960c]/35 bg-white px-4 py-2.5 text-sm text-[#233169] placeholder:text-slate-400 focus:border-[#233169] focus:outline-none"
+                  className="w-full rounded-xl border border-gold/35 bg-white px-4 py-2.5 text-sm text-navy placeholder:text-slate-400 focus:border-navy focus:outline-none"
                 />
 
                 <button
                   type="button"
                   onClick={handleRsvpSubmit}
                   disabled={rsvpSaving}
-                  className="w-full rounded-xl bg-[#c8960c] py-3 text-xs font-semibold uppercase tracking-[2px] text-white shadow-md transition hover:bg-[#b08309] disabled:opacity-60"
+                  className="w-full rounded-xl bg-gold py-3 text-xs font-semibold uppercase tracking-[2px] text-white shadow-md transition hover:bg-[#b08309] disabled:opacity-60"
                 >
                   {rsvpSaving ? "ĐANG GỬI XÁC NHẬN..." : "XÁC NHẬN THAM GIA ✦"}
                 </button>
@@ -571,9 +570,9 @@ export function CoverLetterView({
       {/* 6. LỜI MỜI ĂN UỐNG / TIỆC THÂN MẬT (Tham khảo #reception của ThiepCuoiTuMA) */}
       {secret.post_ceremony_party && (
         <section aria-label="Lời mời ăn uống">
-          <div className="mx-auto max-w-[500px] overflow-hidden rounded-[20px] border border-[#fbb719]/35 bg-white/95 shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md">
-            <div className="bg-[#233169] px-5 py-3.5 text-left">
-              <div className="text-[10px] font-semibold uppercase tracking-[2px] text-[#fbb719]">
+          <div className="mx-auto max-w-[500px] overflow-hidden rounded-[20px] border border-gold/35 bg-white/95 shadow-[0_12px_32px_rgba(10,16,36,0.45)] backdrop-blur-md">
+            <div className="bg-navy px-5 py-3.5 text-left">
+              <div className="text-[10px] font-semibold uppercase tracking-[2px] text-gold">
                 KHAI TIỆC THÂN MẬT • LỜI MỜI ĂN UỐNG
               </div>
               <div className="mt-0.5 font-playfair text-base font-bold text-white sm:text-lg">
@@ -587,7 +586,7 @@ export function CoverLetterView({
                   {secret.post_ceremony_party}
                 </p>
               </div>
-              <p className="mt-4 text-right font-calligraphy text-3xl text-[#233169]">
+              <p className="mt-4 text-right font-calligraphy text-3xl text-navy">
                 {secret.closing_signature}
               </p>
             </div>

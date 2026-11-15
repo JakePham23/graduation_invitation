@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Calendar, GraduationCap, LogOut, MapPin, Search, ShieldCheck } from "lucide-react";
-import encryptedInvitations from "@/data/encrypted-invitations.json";
 import { CEREMONY_INFO } from "@/config/ceremony";
 import { decryptInvitation, encryptInvitation, sha256Hex } from "@/lib/crypto";
 import {
@@ -29,13 +28,13 @@ import type {
   WishEntry,
 } from "@/types/invitation";
 
-const INITIAL_INVITATIONS = encryptedInvitations as EncryptedInvitationRecord[];
+const fallbackInvitationModules = import.meta.glob<EncryptedInvitationRecord[]>(
+  "./data/encrypted-invitations.json",
+  { eager: true, import: "default" },
+);
+const INITIAL_INVITATIONS: EncryptedInvitationRecord[] =
+  Object.values(fallbackInvitationModules)[0] ?? [];
 const ADMIN_HASH = import.meta.env.VITE_ADMIN_PASSWORD_HASH?.trim() || "";
-
-const DEFAULT_QR_KEYS: Record<string, string> = {
-  "inv-ban-dai-hoc": "bandaihoc2026",
-  "inv-gia-dinh": "giadinh2026",
-};
 
 const ROUTE_ALIASES: Record<string, string> = {
   "hoi-ban-dai-hoc-e127b36c": "bandaihoc",
@@ -54,7 +53,7 @@ function loadInitialInvitations(): EncryptedInvitationRecord[] {
   } catch {
     // Bỏ qua lỗi đọc localStorage
   }
-  return INITIAL_INVITATIONS;
+  return isSheetsConfigured() ? [] : INITIAL_INVITATIONS;
 }
 
 function extractRouteSlug(): string | null {
@@ -115,6 +114,9 @@ export function App() {
 
   const [guestLoading, setGuestLoading] = useState(false);
   const [guestError, setGuestError] = useState("");
+  const [sheetsInvitationsLoading, setSheetsInvitationsLoading] = useState<boolean>(() =>
+    isSheetsConfigured(),
+  );
 
   const [wishes, setWishes] = useState<WishEntry[]>([]);
   const [wishesLoading, setWishesLoading] = useState(false);
@@ -243,24 +245,14 @@ export function App() {
             post_ceremony_party: item.post_ceremony_party || "",
           };
         }
-        setInvitationsList((prev) => {
-          const merged = [...prev];
-          for (const encItem of encryptedFromSheet) {
-            const idx = merged.findIndex(
-              (m) =>
-                m.id === encItem.id ||
-                m.route_hash.toLowerCase() === encItem.route_hash.toLowerCase(),
-            );
-            if (idx >= 0) {
-              merged[idx] = encItem;
-            } else {
-              merged.push(encItem);
-            }
-          }
-          localStorage.setItem("grad_admin_encrypted_invitations", JSON.stringify(merged));
-          return merged;
-        });
-        setUnlockedMap((prev) => ({ ...prev, ...secretsFromSheet }));
+        setInvitationsList(encryptedFromSheet);
+        localStorage.setItem(
+          "grad_admin_encrypted_invitations",
+          JSON.stringify(encryptedFromSheet),
+        );
+        if (!extractRouteSlug()) {
+          setUnlockedMap(secretsFromSheet);
+        }
         localStorage.setItem("grad_admin_plain_invitations", JSON.stringify(sheetPlainList));
 
         const extractedHashes = Array.from(
@@ -277,6 +269,9 @@ export function App() {
       })
       .catch(() => {
         // Bỏ qua nếu Apps Script chưa bật action=invitations
+      })
+      .finally(() => {
+        setSheetsInvitationsLoading(false);
       });
   }, []);
 
@@ -358,22 +353,7 @@ export function App() {
       return;
     }
 
-    const defaultKey =
-      guestRouteRecord.default_qr_key || DEFAULT_QR_KEYS[guestRouteRecord.id];
-    if (defaultKey && !guestRouteRecord.uses_server_pepper) {
-      setGuestLoading(true);
-      try {
-        const secret = await decryptInvitation(guestRouteRecord, defaultKey, "");
-        setUnlockedMap((prev) => ({ ...prev, [guestRouteRecord.id]: secret }));
-        start3DSequence();
-        return;
-      } catch {
-        // Nếu mật khẩu khác mặc định thì mở cổng nhập mật khẩu
-      } finally {
-        setGuestLoading(false);
-      }
-    }
-
+    setGuestError("");
     setPasswordGateOpen(true);
   }
 
@@ -429,6 +409,21 @@ export function App() {
   // CHẾ ĐỘ 1: KHÁCH MỞ ĐƯỜNG DẪN QR (Ví dụ: /bandaihoc)
   // ============================================================================
   if (routeHash) {
+    if (!guestRouteRecord && sheetsInvitationsLoading) {
+      return (
+        <div className="flex min-h-[100dvh] items-center justify-center bg-paper px-5 text-center">
+          <div className="max-w-md border border-navy/20 p-8">
+            <h1 className="font-display text-2xl font-semibold text-navy">
+              Đang tải thiệp mời...
+            </h1>
+            <p className="mt-2 text-sm text-sage">
+              Vui lòng chờ giây lát trong khi đồng bộ dữ liệu từ Google Sheets.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
     if (!guestRouteRecord) {
       return (
         <div className="flex min-h-[100dvh] items-center justify-center bg-paper px-5 text-center">

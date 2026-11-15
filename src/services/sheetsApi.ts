@@ -192,7 +192,7 @@ export async function fetchInvitationsFromSheet(): Promise<PlainInvitationRecord
         password,
         admin_password_hash: String(row.admin_password_hash ?? "").trim(),
         private_pepper: "",
-        auto_unlock_qr: true,
+        auto_unlock_qr: false,
         salutation: String(row.salutation ?? "").trim(),
         opening_story: String(row.opening_story ?? "").trim(),
         heartfelt_message: String(row.heartfelt_message ?? "").trim(),
